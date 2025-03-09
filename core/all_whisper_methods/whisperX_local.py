@@ -81,7 +81,8 @@ def transcribe_audio(audio_file: str, start: float, end: float) -> Dict:
         asr_options = {"temperatures": [0],"initial_prompt": "",}
         whisper_language = None if 'auto' in WHISPER_LANGUAGE else WHISPER_LANGUAGE
         rprint("[bold yellow]**You can ignore warning of `Model was trained with torch 1.10.0+cu102, yours is 2.0.0+cu118...`**[/bold yellow]")
-        model = whisperx.load_model(model_name, device, compute_type=compute_type, language=whisper_language, vad_options=vad_options, asr_options=asr_options, download_root=MODEL_DIR)
+        # model = whisperx.load_model(model_name, device, compute_type=compute_type, language=whisper_language, vad_options=vad_options, asr_options=asr_options, download_root=MODEL_DIR)
+        model = whisperx.load_model(model_name, device, compute_type=compute_type, language=whisper_language, vad_options=vad_options, asr_options=asr_options)
 
         # Create temp file with wav format for better compatibility
         with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_audio:
