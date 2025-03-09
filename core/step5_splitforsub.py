@@ -126,6 +126,12 @@ def split_for_sub_main():
         # 更新源数据继续下一轮分割
         src = split_src
         trans = split_trans
+        
+    # Make sure that the src and the remerged have the same length
+    if len(src) > len(remerged):
+        remerged += [None] * (len(src) - len(remerged))
+    elif len(remerged) > len(src):
+        src += [None] * (len(remerged) - len(src))        
 
     pd.DataFrame({'Source': split_src, 'Translation': split_trans}).to_excel(OUTPUT_SPLIT_FILE, index=False)
     pd.DataFrame({'Source': src, 'Translation': remerged}).to_excel(OUTPUT_REMERGED_FILE, index=False)
